@@ -1,0 +1,51 @@
+image: "rust:latest"
+
+variables:
+  RUSTFLAGS: "-C target-cpu=native"
+  CARGO_NET_GIT_FETCH_WITH_CLI: "true"
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_SUBMODULE_FORCE_HTTPS: "true"
+
+
+.git-access:
+  before_script:
+    # Ensure private GitLab repos can be cloned by CI
+    - apt-get update && apt-get install -y cppcheck clang cmake
+    - rm -rf ~/.gitconfig
+    - echo "Setting up Git credentials for private access"
+    - git config --global credential.helper store
+    - echo "https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com" > ~/.git-credentials
+    - git config --global --replace-all url."${CI_SERVER_PROTOCOL}://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com".insteadOf ssh://git@gitlab.com
+    - echo "Git credentials setup complete"
+    - git config --global --list
+    - git submodule update --recursive --init
+
+lint-checks:
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+  script:
+    - ./scripts/check_copyright_notice.sh ./m3/ ./cli/
+    - rustup component add rustfmt
+    - cargo fmt -- --check
+    - rustup component add clippy
+    - RUSTFLAGS="-C target-cpu=native" cargo clippy --all-targets -- -D warnings --no-deps
+    - RUSTFLAGS="-C target-cpu=native" cargo clippy --all-features --all-targets -- -D warnings --no-deps
+  extends:
+    - .git-access
+
+cpu-tests:
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+  tags:
+    - saas-linux-medium-amd64
+  variables:
+    RUST_MIN_STACK: 4000000 # This avoids a stack overflow when running tests
+    RUSTFLAGS: "-C target-cpu=native"
+  script:
+    - rustc --version
+    - cargo --version
+    - cargo test -- --nocapture
+  extends:
+    - .git-access
