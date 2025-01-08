@@ -32,7 +32,7 @@ The CLI module is used to verify a published MPT proof, given an Ethereum block 
 
 Usage example:
 ```sh
-cargo run --release -- --block 0xf6e600bf50753a2290f221811be71a55d571c62d887557d1d507010756e0293f
+cargo run --release -- --block 0xef9a95bfef8e783ddec5301b9ac438c5dc7282430c37ac7ac8cfeca265436f2c
 ```
 
 ## Authors
