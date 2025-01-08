@@ -21,14 +21,14 @@ authors = ["Irreducible Team <opensource@irreducible.com>"]
 # binius_hash = { path = "../binius/crates/hash" }
 # binius_circuits = { path = "../binius/crates/circuits" }
 # binius main
-binius_core = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
-binius_macros = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
-binius_field = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
-binius_utils = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
-binius_math = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
-binius_hal = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
-binius_hash = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
-binius_circuits = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
+binius_core = { git="https://gitlab.com/IrreducibleOSS/binius", rev="c4eee13b" }
+binius_macros = { git="https://gitlab.com/IrreducibleOSS/binius", rev="c4eee13b" }
+binius_field = { git="https://gitlab.com/IrreducibleOSS/binius", rev="c4eee13b" }
+binius_utils = { git="https://gitlab.com/IrreducibleOSS/binius", rev="c4eee13b" }
+binius_math = { git="https://gitlab.com/IrreducibleOSS/binius", rev="c4eee13b" }
+binius_hal = { git="https://gitlab.com/IrreducibleOSS/binius", rev="c4eee13b" }
+binius_hash = { git="https://gitlab.com/IrreducibleOSS/binius", rev="c4eee13b" }
+binius_circuits = { git="https://gitlab.com/IrreducibleOSS/binius", rev="c4eee13b" }
 
 anyhow = "1.0.81"
 assert_matches = "1.5.0"
