@@ -94,7 +94,6 @@ pub fn prove(
     let proof = binius_core::constraint_system::prove::<
         OptimalUnderlier,
         CanonicalTowerFamily,
-        B32,
         _,
         groestl_crypto::Groestl256,
         Groestl256ByteCompression,
