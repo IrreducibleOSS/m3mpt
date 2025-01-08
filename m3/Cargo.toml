@@ -1,0 +1,37 @@
+cargo-features = ["profile-rustflags"]
+
+[package]
+name = "binius_mp3"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[dependencies]
+alloy = { version = "0.4.2", features = ["full", "rlp"] }
+eyre = "0.6.12"
+strum = "0.26.3"
+strum_macros = "0.26.4"
+rand.workspace = true
+tokio = { version = "1.40.0", features = ["rt-multi-thread"] }
+groestl_crypto.workspace = true
+binius_core.workspace = true
+binius_macros.workspace = true
+binius_field.workspace = true
+binius_utils.workspace = true
+binius_math.workspace = true
+binius_hal.workspace = true
+binius_hash.workspace= true
+binius_circuits.workspace = true
+bytemuck.workspace = true
+lazy_static.workspace = true
+rayon.workspace = true
+anyhow.workspace = true
+itertools.workspace = true
+p3-util.workspace = true
+tiny-keccak.workspace = true
+bumpalo.workspace = true
+serde.workspace = true
+bincode.workspace = true
+tracing-profile.workspace = true
+tracing.workspace = true
+serde_json = "1.0.133"

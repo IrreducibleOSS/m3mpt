@@ -1,0 +1,94 @@
+[workspace]
+members = [
+    "m3",
+    "cli"
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Irreducible Team <opensource@irreducible.com>"]
+
+[workspace.dependencies]
+# I use these when I'm modifying Binius locally for help debugging
+# binius_core = { path = "../binius/crates/core" }
+# binius_macros = { path = "../binius/crates/macros" }
+# binius_field = { path = "../binius/crates/field" }
+# binius_utils = { path = "../binius/crates/utils" }
+# binius_math = { path = "../binius/crates/math" }
+# binius_hal = { path = "../binius/crates/hal" }
+# binius_hash = { path = "../binius/crates/hash" }
+# binius_circuits = { path = "../binius/crates/circuits" }
+# binius main
+binius_core = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
+binius_macros = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
+binius_field = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
+binius_utils = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
+binius_math = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
+binius_hal = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
+binius_hash = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
+binius_circuits = { git="https://gitlab.com/IrreducibleOSS/binius", rev="f133ea9f" }
+
+anyhow = "1.0.81"
+assert_matches = "1.5.0"
+auto_impl = "1.2.0"
+bytemuck = { version = "1.18.0", features = ["derive", "min_const_generics", "must_cast"] }
+bytes = "1.7.2"
+bytesize = "1.3.0"
+cfg-if = "1.0.0"
+criterion = { version = "0.5.1", features = ["real_blackbox"] }
+derive_more = "0.99.17"
+digest = "0.10.7"
+either = "1.11.0"
+getset = "0.1.2"
+groestl_crypto = { package = "groestl", version = "0.10.1" }
+hex-literal = "0.4.1"
+itertools = "0.13.0"
+lazy_static = "1.5.0"
+log = "0.4.20"
+paste = "1.0.15"
+p3-challenger = { version = "0.1.0", git = "https://github.com/Plonky3/Plonky3", rev = "72936761" }
+p3-matrix = { version = "0.1.0", git = "https://github.com/Plonky3/Plonky3", rev = "72936761" }
+p3-symmetric = { version = "0.1.0", git = "https://github.com/Plonky3/Plonky3", rev = "72936761" }
+p3-util = { version = "0.1.0", git = "https://github.com/Plonky3/Plonky3", rev = "72936761" }
+proc-macro2 = "1.0.81"
+proptest = "1.2.0"
+quote = "1.0.36"
+rand = { version = "0.8.5", default-features = false, features = ["std_rng"] }
+rayon = "1.8.0"
+seq-macro = "0.3.5"
+stackalloc = "1.2.1"
+static_assertions = "1.1.0"
+subtle = "2.5.0"
+syn = { version = "2.0.60", features = ["full"] }
+thiserror = "1.0.47"
+thread_local = "1.1.7"
+tiny-keccak = { version = "2.0.2", features = ["keccak"] }
+trait-set = "0.3.0"
+tracing = "0.1.38"
+tracing-profile = "0.9.1"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+tracing-tracy = "0.11.0"
+transpose = "0.2.2"
+bumpalo = { version = "3.16.0", features = ["collections"] }
+serde = { version = "1", features = ["derive"] }
+bincode = "1.3.3"
+
+[profile.release]
+lto = "fat"
+
+[profile.profiling]
+inherits = "release"
+debug = true
+
+[profile.bench]
+inherits = "release"
+debug = true
+
+[profile.test]
+opt-level = 3
+debug = true
+debug-assertions = true
+overflow-checks = true
+lto = false
