@@ -1,0 +1,36 @@
+name: cpu-test
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+    group: ${{ github.event_name }}-${{ github.ref }}-lint-checks
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  cpu-test:
+    name: cpu-test
+    runs-on: ubuntu-latest
+    env:
+      CARGO_NET_GIT_FETCH_WITH_CLI: "true"
+      RUST_MIN_STACK: 4000000 # This avoids a stack overflow when running tests
+      RUSTFLAGS: "-C target-cpu=native"
+
+    container:
+      image: rust:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup prerequisites
+        run: |
+          apt-get update && apt-get install -y cppcheck clang cmake
+          git submodule update --recursive --init  
+
+      - name: Run cpu tests
+        run: |
+          rustc --version
+          cargo --version
+          cargo test -- --nocapture
