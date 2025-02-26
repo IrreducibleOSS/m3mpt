@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-    group: ${{ github.event_name }}-${{ github.ref }}-lint-checks
+    group: ${{ github.event_name }}-${{ github.ref }}-cpu-test
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
@@ -27,6 +27,7 @@ jobs:
       - name: Setup prerequisites
         run: |
           apt-get update && apt-get install -y cppcheck clang cmake
+          git config --global --add safe.directory /__w/m3mpt/m3mpt
           git submodule update --recursive --init  
 
       - name: Run cpu tests
