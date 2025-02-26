@@ -21,14 +21,16 @@ jobs:
     container:
       image: rust:latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      # - name: Checkout
+      #   uses: actions/checkout@v4
 
-      - name: Setup prerequisites
-        run: |
-          apt-get update && apt-get install -y cppcheck clang cmake
-          git config --global --add safe.directory /__w/m3mpt/m3mpt
-          git submodule update --recursive --init  
+      # - name: Setup prerequisites
+      #   run: |
+      #     apt-get update && apt-get install -y cppcheck clang cmake
+      #     git config --global --add safe.directory /__w/m3mpt/m3mpt
+      #     git submodule update --recursive --init  
+
+      - uses: setup-prerequisites.yml
 
       - name: Run cpu tests
         run: |
