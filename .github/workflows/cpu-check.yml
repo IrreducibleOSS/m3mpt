@@ -30,7 +30,7 @@ jobs:
       #     git config --global --add safe.directory /__w/m3mpt/m3mpt
       #     git submodule update --recursive --init  
 
-      - uses: setup-prerequisites.yml
+      - uses: ./github/workflows/setup-prerequisites.yml
 
       - name: Run cpu tests
         run: |
