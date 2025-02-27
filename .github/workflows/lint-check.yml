@@ -1,9 +1,8 @@
 name: lint-check
 on:
   pull_request:
-    branches:
-      - main
-  workflow_dispatch:
+    # Run lint on any PR activity
+    types: [opened, synchronize, reopened]
 
 concurrency:
     group: ${{ github.event_name }}-${{ github.ref }}-lint-checks
@@ -22,11 +21,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
+          set-safe-directory: /__w/m3mpt/m3mpt
+
 
       - name: Setup prerequisites
         run: |
           apt-get update && apt-get install -y cppcheck clang cmake
-          git config --global --add safe.directory /__w/m3mpt/m3mpt
           git submodule update --recursive --init  
 
       - name: Run lint tests
