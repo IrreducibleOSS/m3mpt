@@ -1,6 +1,6 @@
 # m3mpt
 
-This project builds a [Binius](https://gitlab.com/IrreducibleOSS/binius) binary proof for compressing [Merkle Patricia Trie](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/) (MPT) inclusion proofs. Irreducible runs a [hosted service](https://www.irreducible.com/posts/ethereum-state-proving-service) that generates and publishes these proofs to Amazon S3. The service processes each Ethereum block in real time and publishes an inclusion proof for all accounts read during block execution.
+This project builds a [Binius](https://github.com/IrreducibleOSS/binius) binary proof for compressing [Merkle Patricia Trie](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/) (MPT) inclusion proofs. Irreducible runs a [hosted service](https://www.irreducible.com/posts/ethereum-state-proving-service) that generates and publishes these proofs to Amazon S3. The service processes each Ethereum block in real time and publishes an inclusion proof for all accounts read during block execution.
 
 For a summary of how the constraint system in this repo arithmetizes MPT inclusion proofs, see [MPT Inclusion](https://www.binius.xyz/basics/arithmetization/mpt) arithmetization.
 
@@ -30,7 +30,7 @@ cargo test --release test_prove_verify_cpu_450_mainnet -- --include-ignored --no
 ```
 
 Testing without running in release mode will likely be too slow.
-The flag `--nocapture` allows for printing tracing information to give you an idea of the steps taken during proving and verification and their relative times. This tracing is done using [tracing profile](https://gitlab.com/IrreducibleOSS/tracing-profile).
+The flag `--nocapture` allows for printing tracing information to give you an idea of the steps taken during proving and verification and their relative times. This tracing is done using [tracing profile](https://github.com/IrreducibleOSS/tracing-profile).
 
 ## References
 

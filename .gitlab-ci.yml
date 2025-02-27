@@ -1,5 +1,0 @@
-stages:
-  - test
-  
-include:
-  - local: '.gitlab/gitlab-ci.yml'

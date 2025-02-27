@@ -1,0 +1,43 @@
+name: lint-check
+on:
+  pull_request:
+    # Run lint on any PR activity
+    types: [opened, synchronize, reopened]
+
+concurrency:
+    group: ${{ github.event_name }}-${{ github.ref }}-lint-checks
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lint-check:
+    name: lint 
+    runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: "-C target-cpu=native"
+      CARGO_NET_GIT_FETCH_WITH_CLI: "true"
+
+    container:
+      image: rust:latest
+    steps:
+      - name: Setup prerequisites
+        run: |
+          apt-get update && apt-get install -y cppcheck clang cmake git-lfs
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup git
+        run: |
+          git config --global --add safe.directory /__w/m3mpt/m3mpt
+          git submodule update --recursive --init  
+
+      - name: Run lint tests
+        run: |
+          ./scripts/check_copyright_notice.sh ./m3/ ./cli/
+          rustup component add rustfmt
+          cargo fmt -- --check
+          rustup component add clippy
+          RUSTFLAGS="-C target-cpu=native" cargo clippy --all-targets -- -D warnings --no-deps
+          RUSTFLAGS="-C target-cpu=native" cargo clippy --all-features --all-targets -- -D warnings --no-deps
