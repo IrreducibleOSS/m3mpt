@@ -23,15 +23,18 @@ jobs:
     container:
       image: rust:latest
     steps:
+      - name: Setup prerequisites
+        run: |
+          apt-get update && apt-get install -y cppcheck clang cmake git-lfs
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
           lfs: true
           set-safe-directory: /__w/m3mpt/m3mpt
 
-      - name: Setup prerequisites
+      - name: Setup submodules
         run: |
-          apt-get update && apt-get install -y cppcheck clang cmake
           git submodule update --recursive --init  
 
       - name: Run cpu tests
